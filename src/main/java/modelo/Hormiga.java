@@ -7,6 +7,7 @@ public class Hormiga {
     private Posicion ubicacion;
     private TipoHormiga tipo;
     private int cargaAlimento;
+    private EstadoHormiga estado;
 
     public Hormiga(Posicion ubicacion, TipoHormiga tipo) {
         this.ubicacion = ubicacion;
@@ -23,14 +24,13 @@ public class Hormiga {
     }
 
     public void extraerAlimento(Alimento alimento){
-        mover(alimento.getPosicion());
-        int extraido = maximaExtraccionDeAlimento(alimento);
-        alimento.extraer(extraido);
-        agregarAlimento(extraido);
+
+        estado.extraerAlimento(this, alimento);
+
     }
 
     public int maximaExtraccionDeAlimento(Alimento alimento){
-        return Math.min(alimento.getReserva(), Hormiga.maximaCarga() - cargaAlimento);
+        return Math.min(alimento.getReserva(), capacidadDeCarga() - cargaAlimento);
     }
 
     public void agregarAlimento(int gramosRecolectados){
@@ -38,11 +38,15 @@ public class Hormiga {
     }
 
     public int entregarAlimento(){
-        return tipo.entregarAlimento(this);
+        return estado.entregarAlimento(this);
+    }
+
+    public void descansar(){
+        estado.descansar(this);
     }
 
     public boolean estaAlLimite(){
-        return cargaAlimento == Hormiga.maximaCarga();
+        return cargaAlimento == capacidadDeCarga();
     }
 
     public Posicion getUbicacion() {
@@ -51,6 +55,18 @@ public class Hormiga {
 
     public void atacar(IIntruso atacante){
 
+    }
+
+    public void setEstado(EstadoHormiga estado) {
+        this.estado = estado;
+    }
+
+    public TipoHormiga getTipo() {
+        return tipo;
+    }
+
+    public int capacidadDeCarga(){
+        return estado.getCapacidadCarga();
     }
 
 }
