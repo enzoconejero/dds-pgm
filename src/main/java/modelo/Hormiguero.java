@@ -16,7 +16,12 @@ public class Hormiguero implements IPoblacionHormigas {
         this.hormigas = new HashSet<Hormiga>();
         this.alimento = 0;
     }
-
+    public Hormiguero(Posicion ubicacion, ModoDefensa modoDefensa, HashSet <Hormiga> hormigas) {
+        this.ubicacion = ubicacion;
+        this.modoDefensa = modoDefensa;
+        this.hormigas = hormigas;
+        this.alimento = 0;
+    }
     public void reclamarAlimento() {
         hormigas.forEach(h -> alimento += h.entregarAlimento());
     }
@@ -33,9 +38,9 @@ public class Hormiguero implements IPoblacionHormigas {
         return hormigas.size();
     }
 
-    public void agregarHormiga(Hormiga hormiga) {
-        hormigas.add(hormiga);
-    }
+//    public void agregarHormiga(Hormiga hormiga) {
+//        hormigas.add(hormiga);
+//    }
 
     public Set<Hormiga> getHormigas() {
         return hormigas;
