@@ -1,11 +1,15 @@
 package modelo;
 
 public class Hormiga {
-    private Posicion posicion;
+
+    public static int maximaCarga(){ return 10; }
+
+    private Posicion ubicacion;
     private TipoHormiga tipo;
     private int cargaAlimento;
-    public Hormiga(Posicion posicion, TipoHormiga tipo) {
-        this.posicion = posicion;
+
+    public Hormiga(Posicion ubicacion, TipoHormiga tipo) {
+        this.ubicacion = ubicacion;
         this.tipo = tipo;
         this.cargaAlimento=0;
     }
@@ -14,29 +18,39 @@ public class Hormiga {
         return cargaAlimento;
     }
 
-    public void mover(Posicion posicion){
-        this.posicion=posicion;
+    public void mover(Posicion ubicacion){
+        this.ubicacion=ubicacion;
     }
 
     public void extraerAlimento(Alimento alimento){
-        this.mover(alimento.getPosicion());
-        alimento.extraer(this.maximaExtraccionDeAlimento(alimento));
-        this.agregarAlimento(this.maximaExtraccionDeAlimento(alimento));
+        mover(alimento.getPosicion());
+        int extraido = maximaExtraccionDeAlimento(alimento);
+        alimento.extraer(extraido);
+        agregarAlimento(extraido);
     }
 
     public int maximaExtraccionDeAlimento(Alimento alimento){
-        return Math.min(alimento.getReserva(),10-this.cargaAlimento);
+        return Math.min(alimento.getReserva(), Hormiga.maximaCarga() - cargaAlimento);
     }
 
     public void agregarAlimento(int gramosRecolectados){
         cargaAlimento+=gramosRecolectados;
     }
 
-    public void entregarAlimento(){
-        this.tipo.entregarAlimento(this);
+    public int entregarAlimento(){
+        return tipo.entregarAlimento(this);
     }
 
+    public boolean estaAlLimite(){
+        return cargaAlimento == Hormiga.maximaCarga();
+    }
 
+    public Posicion getUbicacion() {
+        return ubicacion;
+    }
 
+    public void atacar(String atacante){
+        System.out.println("Atacando al gil de " + atacante);
+    }
 
 }

@@ -1,18 +1,19 @@
 package modelo;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Hormiguero {
 
     private Set<Hormiga> hormigas;
     private Posicion ubicacion;
-    private double alimento;
+    private int alimento;
     private ModoDefensa modoDefensa;
 
     public Hormiguero(Posicion ubicacion, ModoDefensa modoDefensa) {
         this.ubicacion = ubicacion;
         this.modoDefensa = modoDefensa;
-        this.hormigas = new Set<Hormiga>();
+        this.hormigas = new HashSet<Hormiga>();
         this.alimento = 0;
     }
 
@@ -21,7 +22,7 @@ public class Hormiguero {
     }
 
     public void defender(Hormiga hormiga) {
-        modoDefensa.defender(hormiga, this);
+        modoDefensa.defender(this, hormiga);
     }
 
     public int poblacion() {
@@ -40,7 +41,7 @@ public class Hormiguero {
         return ubicacion;
     }
 
-    public double getAlimento() {
+    public int getAlimento() {
         return alimento;
     }
     
