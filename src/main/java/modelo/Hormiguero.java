@@ -5,11 +5,11 @@ import java.util.Set;
 public class Hormiguero {
 
     private Set<Hormiga> hormigas;
-    private Punto ubicacion;
+    private Posicion ubicacion;
     private double alimento;
     private ModoDefensa modoDefensa;
 
-    public Hormiguero(Punto ubicacion, ModoDefensa modoDefensa) {
+    public Hormiguero(Posicion ubicacion, ModoDefensa modoDefensa) {
         this.ubicacion = ubicacion;
         this.modoDefensa = modoDefensa;
         this.hormigas = new Set<Hormiga>();
@@ -17,7 +17,7 @@ public class Hormiguero {
     }
 
     public void reclamarAlimento() {
-        hormigas.forEach(h -> alimento += h.reclamarAlimento());
+        hormigas.forEach(h -> alimento += h.entregarAlimento());
     }
 
     public void defender(Hormiga hormiga) {
@@ -36,7 +36,7 @@ public class Hormiguero {
         return hormigas;
     }
 
-    public Punto getUbicacion() {
+    public Posicion getUbicacion() {
         return ubicacion;
     }
 
