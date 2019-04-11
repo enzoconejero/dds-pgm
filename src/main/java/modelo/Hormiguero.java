@@ -3,7 +3,7 @@ package modelo;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Hormiguero {
+public class Hormiguero implements IPoblacionHormigas {
 
     private Set<Hormiga> hormigas;
     private Posicion ubicacion;
@@ -23,6 +23,10 @@ public class Hormiguero {
 
     public void defender(Hormiga hormiga) {
         modoDefensa.defender(this, hormiga);
+    }
+
+    public void defender(IIntruso intruso){
+        hormigas.forEach(h -> h.atacar(intruso));
     }
 
     public int poblacion() {

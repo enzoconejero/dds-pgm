@@ -49,8 +49,8 @@ public class Hormiga {
         return ubicacion;
     }
 
-    public void atacar(String atacante){
-        System.out.println("Atacando al gil de " + atacante);
+    public void atacar(IIntruso atacante){
+
     }
 
 }
